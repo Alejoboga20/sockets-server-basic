@@ -20,6 +20,13 @@
 			socket.on('Welcome', (data) => {
 				console.log('Server emiting: ', data);
 			});
+
+			setTimeout(() => {
+				socket.emit('Client Msg', {
+					msg: 'Client',
+					name: 'Alejo',
+				});
+			}, 2000);
 		</script>
 	</body>
 </html>
