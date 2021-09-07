@@ -15,7 +15,11 @@
 			referrerpolicy="no-referrer"
 		></script>
 		<script>
-			io('http://localhost:8080');
+			const socket = io('http://localhost:8080');
+
+			socket.on('Welcome', (data) => {
+				console.log('Server emiting: ', data);
+			});
 		</script>
 	</body>
 </html>
