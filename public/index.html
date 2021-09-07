@@ -27,7 +27,7 @@
 					/>
 				</div>
 				<div class="col-4">
-					<button class="btn btn-primary">Send</button>
+					<button type="submit" class="btn btn-primary">Send</button>
 				</div>
 			</div>
 		</form>
@@ -62,6 +62,20 @@
 
 			const form = document.querySelector('#myForm');
 			const msgs = document.querySelector('#myMsgs');
+			const txtMsg = document.querySelector('#txtMsg');
+
+			form.addEventListener('submit', (event) => {
+				event.preventDefault();
+
+				const newMsg = txtMsg.value;
+				socket.emit('Client Msg', {
+					newMsg,
+				});
+			});
+
+			socket.on('Server Msg', (data) => {
+				msgs.innerHTML += `<li>${data.newMsg}</li>`;
+			});
 		</script>
 	</body>
 </html>

@@ -10,7 +10,11 @@ app.use(express.static(__dirname + '/public'));
 io.on('connection', (socket) => {
 	socket.emit('Welcome', { msg: 'Hello Socket' });
 
-	socket.on('Client Msg', (data) => console.log(data));
+	socket.on('Client Msg', (data) => {
+		console.log(data);
+
+		io.emit('Server Msg', data);
+	});
 });
 
 server.listen(8080, () => console.log('server up'));
