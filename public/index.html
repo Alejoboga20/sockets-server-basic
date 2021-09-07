@@ -68,12 +68,12 @@
 				event.preventDefault();
 
 				const newMsg = txtMsg.value;
-				socket.emit('Client Msg', {
+				socket.emit('msg-to-server', {
 					newMsg,
 				});
 			});
 
-			socket.on('Server Msg', (data) => {
+			socket.on('msg-from-server', (data) => {
 				msgs.innerHTML += `<li>${data.newMsg}</li>`;
 			});
 		</script>

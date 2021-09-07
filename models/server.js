@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const socketio = require('socket.io');
+const Sockets = require('./sockets');
 
 class Server {
 	constructor() {
@@ -18,15 +19,19 @@ class Server {
 	}
 
 	middlewares() {
-		this.app.use(express.static(path.resolve(__dirname + '../public')));
+		this.app.use(express.static(path.resolve(__dirname + '/../public')));
+		console.log(path.resolve(__dirname + '../public'));
 	}
 
-	configSockets() {}
+	configSockets() {
+		new Sockets(this.io);
+	}
 
 	execute() {
 		//Init middlewares
 		this.middlewares();
 		//Init Sockets
+		this.configSockets();
 		//Init server
 		this.server.listen(this.port, () =>
 			console.log('server up in port: ', this.port)
